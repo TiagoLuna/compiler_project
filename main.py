@@ -7,12 +7,5 @@ lexer = lex.lex()
 
 with open(sys.argv[1], 'r') as f:
     lexer.input(f.read())
-
-    for tok in lexer:
-        tok_array = numpy.array([tok.type, tok.value, tok.lexpos, tok.lineno])
-        print(tabulate([tok_array], headers=['Tipo','Valor','Posição','Linha']),'\n')
-        
-    '''
-    for i in tok_array
-    print(tabulate([[tok.type,tok.value]]))
-    '''
+    tok_array = [[tok.type, tok.value, tok.lexpos, tok.lineno] for tok in lexer]
+    print(tabulate(tok_array, headers=['Tipo','Valor','Posição','Linha']),'\n')
