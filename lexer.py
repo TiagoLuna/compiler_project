@@ -1,7 +1,13 @@
-import ply.lex as lex
-import re
+reserved = {
+    'else' : 'ELSE',
+    'if' : 'IF',
+    'int' : 'INT',
+    'return' : 'RETURN',
+    'void' : 'VOID',
+    'while' : 'WHILE'
+}
 
-tokens = (
+tokens = [
     'ID',
     'NUM',
     'PLUS',
@@ -24,7 +30,7 @@ tokens = (
     'LKEY',
     'RKEY',
     'COMENT'
-)
+] + list(reserved.values())
 
 def t_COMENT(t):
     r'/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/'
@@ -32,6 +38,7 @@ def t_COMENT(t):
 
 def t_ID(t):
     r'[a-zA-Z]+'
+    t.type = reserved.get(t.value,'ID')
     return t
 
 def t_NUM(t):
