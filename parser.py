@@ -244,4 +244,4 @@ class Parser():
         'empty :'
         pass
 
-start='program | declaration_list'
+start='program'
